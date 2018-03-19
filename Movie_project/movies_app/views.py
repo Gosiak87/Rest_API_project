@@ -11,11 +11,11 @@ from movies_app.models import Movie
 class MoviesView(APIView):
     def get(self, request):
         movies = Movie.objects.all()
-        serializer = MovieSerializer(movies, many=True, context={'request': request}) # many przy wielu obiektaach
+        serializer = MovieSerializer(movies, many=True, context={'request': request})   # many przy wielu obiektaach
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = MovieSerializer(Movie, data=request.data)
+        serializer = MovieSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
