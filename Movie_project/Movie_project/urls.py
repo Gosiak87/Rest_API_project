@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from movies_app.views import MoviesView, MovieView
+from movies_app.views import MoviesView, MovieView, PersonsView, PersonView
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^movies$', MoviesView.as_view()),
-    url(r'^movie/(?P<pk>\d+)$', MovieView.as_view())
+    url(r'^movie/(?P<pk>\d+)$', MovieView.as_view()),
+    url(r'^persons$', PersonsView.as_view()),
+    url(r'^person/(?P<pk>\d+)$', PersonView.as_view()),
 ]
