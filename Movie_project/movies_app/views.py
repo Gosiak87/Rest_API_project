@@ -14,19 +14,19 @@ class MoviesView(APIView):
         serializer = MovieSerializer(movies, many=True, context={'request': request}) # many przy wielu obiektaach
         return Response(serializer.data)
 
-
-class MovieView(APIView):
-    def get(self, request, pk):
-        movie = get_object_or_404(Movie, pk=pk)
-        serializer = MovieSerializer(movie)
-        return Response(serializer.data)
-
     def post(self, request):
         serializer = MovieSerializer(Movie, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MovieView(APIView):
+    def get(self, request, pk):
+        movie = get_object_or_404(Movie, pk=pk)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
 
     def delete(self, request, pk):
         movie = get_object_or_404(Movie, pk=pk)
